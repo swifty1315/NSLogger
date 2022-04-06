@@ -31,7 +31,7 @@
  * LIABILITY,  WHETHER  IN CONTRACT,  STRICT  LIABILITY,  OR TORT  (INCLUDING
  * NEGLIGENCE  OR OTHERWISE)  ARISING  IN ANY  WAY  OUT OF  THE  USE OF  THIS
  * SOFTWARE,   EVEN  IF   ADVISED  OF   THE  POSSIBILITY   OF  SUCH   DAMAGE.
- * 
+ *
  */
 #import <unistd.h>
 #import <pthread.h>
@@ -39,35 +39,37 @@
 #import <libkern/OSAtomic.h>
 #import <Foundation/Foundation.h>
 #import <CoreFoundation/CoreFoundation.h>
+#if TARGET_OS_OSX
 #import <SystemConfiguration/SystemConfiguration.h>
+#endif
 #if !TARGET_OS_IPHONE
 #import <CoreServices/CoreServices.h>
 #endif
 
 // This define is here so that user application can test whether NSLogger Client is
 // being included in the project, and potentially configure their macros accordingly
-#define NSLOGGER_WAS_HERE		1
+#define NSLOGGER_WAS_HERE        1
 
 /* -----------------------------------------------------------------
  * Logger option flags & default options
  * -----------------------------------------------------------------
  */
 enum {
-	kLoggerOption_LogToConsole						= 0x01,
-	kLoggerOption_BufferLogsUntilConnection			= 0x02,
-	kLoggerOption_BrowseBonjour						= 0x04,
-	kLoggerOption_BrowseOnlyLocalDomain				= 0x08,
-	kLoggerOption_UseSSL							= 0x10,
-	kLoggerOption_CaptureSystemConsole				= 0x20,
-	kLoggerOption_BrowsePeerToPeer					= 0x40
+    kLoggerOption_LogToConsole                        = 0x01,
+    kLoggerOption_BufferLogsUntilConnection            = 0x02,
+    kLoggerOption_BrowseBonjour                        = 0x04,
+    kLoggerOption_BrowseOnlyLocalDomain                = 0x08,
+    kLoggerOption_UseSSL                            = 0x10,
+    kLoggerOption_CaptureSystemConsole                = 0x20,
+    kLoggerOption_BrowsePeerToPeer                    = 0x40
 };
 
-#define LOGGER_DEFAULT_OPTIONS	(kLoggerOption_BufferLogsUntilConnection |	\
-								 kLoggerOption_BrowseBonjour |				\
-								 kLoggerOption_BrowsePeerToPeer |			\
-								 kLoggerOption_BrowseOnlyLocalDomain |		\
-								 kLoggerOption_UseSSL |						\
-								 kLoggerOption_CaptureSystemConsole)
+#define LOGGER_DEFAULT_OPTIONS    (kLoggerOption_BufferLogsUntilConnection |    \
+                                 kLoggerOption_BrowseBonjour |                \
+                                 kLoggerOption_BrowsePeerToPeer |            \
+                                 kLoggerOption_BrowseOnlyLocalDomain |        \
+                                 kLoggerOption_UseSSL |                        \
+                                 kLoggerOption_CaptureSystemConsole)
 
 // The Logger struct is no longer public, use the new LoggerGet[...] functions instead
 typedef struct Logger Logger;
@@ -141,7 +143,7 @@ extern UInt32 LoggerGetViewerPort(Logger *logger) NSLOGGER_NOSTRIP;
 // Configure the logger to use a local file for buffering, instead of memory.
 // - If you initially set a buffer file after logging started but while a logger connection
 //   has not been acquired, the contents of the log queue will be written to the buffer file
-//	 the next time a logging function is called, or when LoggerStop() is called.
+//     the next time a logging function is called, or when LoggerStop() is called.
 // - If you want to change the buffering file after logging started, you should first
 //   call LoggerStop() the call LoggerSetBufferFile(). Note that all logs stored in the previous
 //   buffer file WON'T be transferred to the new file in this case.

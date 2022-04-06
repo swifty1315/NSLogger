@@ -20,3 +20,4 @@ Built Products
 .build
 .swiftpm
 xcshareddata
+DerivedData
