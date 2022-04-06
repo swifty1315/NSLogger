@@ -39,7 +39,7 @@ import Foundation
 @_exported import NSLoggerLibObjC
 #endif
 
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
 public typealias Image = UIImage
 #endif
@@ -97,7 +97,7 @@ public final class Logger {
     }
     
     private func imageData(_ image: Image) -> (data: Data, width: Int, height: Int)? {
-        #if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS) || os(watchOS)
 			#if swift(>=4.2)
 				guard let imageData = image.pngData() else { return nil }
 			#else
