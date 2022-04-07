@@ -363,7 +363,6 @@
 			buildSettings = {
 				PRODUCT_BUNDLE_IDENTIFIER = com.florentpillet.NSLogger;
 				PRODUCT_NAME = NSLogger;
-				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchsimulator watchos";
 			};
 			name = Debug;
 		};
@@ -372,7 +371,6 @@
 			buildSettings = {
 				PRODUCT_BUNDLE_IDENTIFIER = com.florentpillet.NSLogger;
 				PRODUCT_NAME = NSLogger;
-				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchsimulator watchos";
 			};
 			name = Release;
 		};
